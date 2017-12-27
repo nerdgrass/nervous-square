@@ -20,9 +20,31 @@ export default class App extends Component {
 
 class NervousSquare extends Component {
   handleCanvas = (canvas) => {
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'purple';
-    ctx.fillRect(0, 0, 100, 100);
+    function init() {
+      const p = 50;
+      const ctx = canvas.getContext('2d');
+      ctx.fillRect(96-p/2,54-p/2,p,p);
+      requestAnimationFrame(draw);
+    }
+    const draw = () => {
+      requestAnimationFrame(draw);
+      const ctx = canvas.getContext('2d');
+      const p = 50;
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.width = 192;
+      ctx.fillStyle = 'purple';
+      ctx.rotate(Math.random()/100);
+      ctx.fillRect(96-p/2,54-p/2,p,p);
+      ctx.restore();
+      
+    };
+    init();
+    
+    
+    //ctx.fillStyle = 'purple';
+    // ctx.fillRect(0, 0, 100, 100);
+    
   }
   render() {
     return (
